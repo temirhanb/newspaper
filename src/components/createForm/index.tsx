@@ -55,7 +55,7 @@ export const CreateForm: React.FC<IProps> = ({openCreateForm}) => {
 
   return (
     <form
-      className={"bg-white max-h-[550px] w-96 overflow-x-hidden overflow-y-auto flex flex-col shadow-xl border-[1px] rounded-2xl px-8 pt-6 pb-8 mb-4"}
+      className={"bg-white md:max-h-[550px] w-96  overflow-x-hidden overflow-y-auto flex flex-col shadow-xl border-[1px] rounded-2xl px-8 pt-6 pb-8 mb-4"}
       onSubmit={formik.handleSubmit}
     >
       <div className={"mb-5 flex flex-row justify-between\t"}>
