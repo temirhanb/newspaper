@@ -16,6 +16,7 @@ export type ArrayStateNews = {
 type Actions = {
   createNews: (qty: StateNews) => void
   updateNews: (qty: StateNews) => void
+  setState: (qty: StateNews[]) => void
   deleteNews: (qty: string) => void
   setOpenEditForm: () => void
   editedNews: (qty: StateNews) => void
@@ -101,6 +102,7 @@ export const useCountStore = create<ArrayStateNews & Actions>()(
     createNews: (qty: StateNews) =>
       set((state) => {
         state.items.push(qty);
+        window.localStorage.setItem("state", JSON.stringify(state.items));
       }),
     setOpenEditForm: () => set((state) => {
       return {items: state.items, openEditForm: !state.openEditForm, editedNewsItem: state.editedNewsItem};
@@ -112,6 +114,7 @@ export const useCountStore = create<ArrayStateNews & Actions>()(
       set((state) => {
         const updatedIdx = state.items.findIndex(({id}) => id === qty.id);
         state.items[updatedIdx] = qty;
+        window.localStorage.setItem("state", JSON.stringify(state.items));
       }),
     deleteNews: (qty: string) =>
       set((state) => {
@@ -123,5 +126,15 @@ export const useCountStore = create<ArrayStateNews & Actions>()(
           editedNewsItem: state.editedNewsItem
         };
       }),
+    setState: (qty: StateNews[]) => set((state) => {
+      return (
+        {
+          items: qty,
+          openEditForm: state.openEditForm,
+          editedNewsItem: state.editedNewsItem
+        }
+      );
+    })
+
   })),
 );
